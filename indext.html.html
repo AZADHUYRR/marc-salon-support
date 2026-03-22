@@ -1,0 +1,187 @@
+]<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <!-- <link rel="stylesheet" href="marc.css"> -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marc Salon Support</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1a1a1a, #333);
+  color: #fff;
+}
+
+header {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  color: #ccc;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: #fff;
+  color: #000;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+h2 {
+  text-align: center;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 15px;
+  display: block;
+}
+
+button {
+  background: #000;
+  color: #fff;
+  padding: 14px;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #444;
+}
+
+.hidden {
+  display: none;
+}
+
+.note {
+  font-size: 12px;
+  color: red;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Marc Salon Furniture & Beauty Equipments</h1>
+  <p>Customer Support & Complaint Portal</p>
+</header>
+
+<div class="container">
+
+<h2>Submit Your Issue</h2>
+
+<form id="form">
+
+<label>Client Name</label>
+<input type="text" required>
+
+<label>Salon Name</label>
+<input type="text" required>
+
+<label>Salon Address</label>
+<textarea required></textarea>
+
+<label>Is your product under warranty?</label>
+<select id="warranty" required>
+  <option value="">Select Option</option>
+  <option value="yes">Yes</option>
+  <option value="no">No</option>
+</select>
+
+<div id="invoiceBox" class="hidden">
+  <label>Please upload your Invoice / Bill</label>
+  <input type="file" id="invoice">
+  <div class="note">Without invoice, request will not be processed</div>
+</div>
+
+<div id="gstBox" class="hidden">
+  <label>Please enter your GST Number</label>
+  <input type="text" id="gst">
+  <div class="note">Without GST number, request will not be processed</div>
+</div>
+
+<label>Describe your issue</label>
+<textarea required></textarea>
+
+<label>Upload Photo</label>
+<input type="file" required>
+
+<label>Upload Video</label>
+<input type="file" required>
+
+<button type="submit">Submit Complaint</button>
+
+</form>
+
+</div>
+
+<footer>
+© Marc Salon Furniture & Beauty Equipments
+</footer>
+
+<script>
+const warranty = document.getElementById("warranty");
+const invoiceBox = document.getElementById("invoiceBox");
+const gstBox = document.getElementById("gstBox");
+
+warranty.addEventListener("change", function() {
+  if (this.value === "yes") {
+    invoiceBox.classList.remove("hidden");
+    gstBox.classList.add("hidden");
+  } else if (this.value === "no") {
+    gstBox.classList.remove("hidden");
+    invoiceBox.classList.add("hidden");
+  }
+});
+
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  if(warranty.value === "yes" && document.getElementById("invoice").value === ""){
+    alert("Please upload invoice!");
+    return;
+  }
+
+  if(warranty.value === "no" && document.getElementById("gst").value === ""){
+    alert("Please enter GST number!");
+    return;
+  }
+
+  alert("Complaint Submitted Successfully!");
+});
+</script>
+
+</body>
+</html>
